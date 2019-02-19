@@ -59,8 +59,12 @@ function SEO({ description, lang, meta, keywords, title }) {
                     }
                   : []
               )
-              .concat(meta)}
-          />
+              .concat(meta)}>
+            <link
+              href="https://fonts.googleapis.com/css?family=Hind+Vadodara:300,400,500,600,700|Ubuntu:300,300i,400,400i,500,500i,700,700i|Amatic+SC:400,700|Dawning+of+a+New+Day"
+              rel="stylesheet"
+            />
+          </Helmet>
         )
       }}
     />
