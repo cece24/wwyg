@@ -9,7 +9,7 @@ const HeaderContainer = styled.div`
   width: 100%;
   z-index: 100;
   background: #fff;
-  height: 4rem;
+  height: 5rem;
   padding: 0.5rem 1rem;
 `
 
@@ -24,8 +24,23 @@ const Title = styled.h1`
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   margin: 0;
+  margin-left: 2rem;
   font-size: 3rem;
   width: 20rem;
+`
+
+const TitleOverlay = styled.h1`
+  font-family: 'La Belle Aurore', sans-serif;
+  // background: linear-gradient(to right, #43e8d8 5%, #7f7f7f 40%);
+  background-color: rgba(137, 236, 218, 0.8);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  position: relative;
+  top: -2.1rem;
+  left: 5rem;
+  font-size: 2.5rem;
+  width: 100%;
+  line-height: 5rem;
 `
 
 const Header = ({ siteTitle }) => (
@@ -37,6 +52,7 @@ const Header = ({ siteTitle }) => (
         }}
         to="/">
         <Title>{siteTitle}</Title>
+        <TitleOverlay>By Cece</TitleOverlay>
       </Link>
     </TitleContainer>
   </HeaderContainer>
