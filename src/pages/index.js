@@ -2,14 +2,12 @@ import React from 'react'
 import { Link } from 'gatsby'
 
 import Layout from '../components/Layout'
-import Hero from '../components/Hero'
 import Image from '../components/Image'
 import SEO from '../components/SEO'
 
 const IndexPage = () => (
   <Layout>
     <SEO title="Home" keywords={[`gatsby`, `application`, `react`]} />
-    <Hero />
     <div>
       <h1>The spectacle before us was indeed sublime.</h1>
       <p>
