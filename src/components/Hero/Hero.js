@@ -6,12 +6,32 @@ import BackgroundImage from 'gatsby-background-image'
 import { fadeIn, raiseIn, zoomIn } from '../../theme/animations'
 import FeaturedPost from './FeaturedPost'
 
+const HeroSlidesData = [
+  {
+    title: 'Gorgeous white sand beaches in Anguilla',
+    tag: 'beach paradise',
+    imgName: 'anguilla',
+    url: 'anguilla',
+  },
+  {
+    title: 'Turquoise waters in Tulum',
+    tag: 'beach paradise',
+    imgName: 'mexico',
+    url: 'mexico',
+  },
+  {
+    title: 'Night market in Shanghai',
+    tag: 'asia',
+    imgName: 'shanghai',
+    url: 'shanghai',
+  },
+]
+
 const HeroContainer = styled.div`
   max-width: 1600px;
   margin-bottom: 3rem;
   height: 100vh;
   display: flex;
-  overflow: hidden;
 
   opacity: 0;
   ${fadeIn}
@@ -38,6 +58,14 @@ const HeroImage = ({ children, className, imgName }) => (
             }
           }
         }
+
+        shanghai: file(relativePath: { eq: "shanghai.jpg" }) {
+          childImageSharp {
+            fluid(quality: 100, maxWidth: 3000) {
+              ...GatsbyImageSharpFluid
+            }
+          }
+        }
       }
     `}
     render={data => {
@@ -53,13 +81,43 @@ const HeroImage = ({ children, className, imgName }) => (
 )
 
 const StyledHeroImage = styled(HeroImage)`
-  width: 100%;
+  position: absolute;
+  height: 100vh;
   background-position: center;
   background-size: cover;
 
-  ${zoomIn}
-  -webkit-animation: 10s forwards zoomIn;
-  animation: 10s forwards zoomIn;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.8s ease, visibility 0.8s ease;
+
+  ${({ active }) =>
+    active &&
+    `
+    opacity: 1;
+    visibility: visible;
+    ${zoomIn}
+    -webkit-animation: 10s forwards zoomIn;
+    animation: 10s forwards zoomIn;
+  `};
+`
+
+const HeroSlide = styled.div`
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+`
+
+const GradientOverlay = styled.div`
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    opacity: 0.3;
+    z-index: 100;
+    background-image: linear-gradient(to right top, #000000, rgba(0,0,0, 0) 40%);
+}
 `
 
 const NavContainer = styled.div`
@@ -81,14 +139,10 @@ const NavContainer = styled.div`
     raiseIn 1.6s ease-in 0.3s forwards;
 `
 
-const NavLink = styled(Link)`
+const NavItem = styled.div`
   font-family: 'Hind Vadodara', sans-serif;
   font-size: 0.8rem;
-  text-decoration: none;
-  color: inherit;
-`
-
-const NavItem = styled.div`
+  cursor: pointer;
   color: #fff;
   width: 15vw;
   height: 15vh;
@@ -125,55 +179,68 @@ class Hero extends Component {
     super(props)
 
     this.state = {
-      currentIndex: 0,
+      currentSlideIndex: 0,
     }
   }
 
   componentDidMount() {
-    this.autoPlay = setInterval(() => {
+    this.autoplayId = setInterval(() => {
       this.changeIndex()
-    }, 4000)
+    }, 8000)
+  }
+
+  resetAutoplay() {
+    clearInterval(this.autoplayId)
   }
 
   changeIndex = newIndex => {
-    if (this.state.currentIndex === 2) {
+    if (newIndex) {
       return this.setState({
-        currentIndex: 0,
+        currentSlideIndex: newIndex,
+      })
+    }
+
+    if (this.state.currentSlideIndex === 2) {
+      return this.setState({
+        currentSlideIndex: 0,
       })
     }
 
     this.setState(prevState => ({
-      currentIndex: prevState.currentIndex + 1,
+      currentSlideIndex: prevState.currentSlideIndex + 1,
     }))
   }
 
   render() {
     return (
       <HeroContainer>
-        <StyledHeroImage imgName="anguilla" />
-
-        <FeaturedPost
-          tag="beach paradise"
-          url="anguilla"
-          title="Gorgeous white sand beaches in Anguilla"
-        />
+        {HeroSlidesData.map((slide, index) => (
+          <HeroSlide key={index}>
+            <StyledHeroImage
+              imgName={slide.imgName}
+              active={this.state.currentSlideIndex === index}
+            />
+            <FeaturedPost
+              active={this.state.currentSlideIndex === index}
+              tag={slide.tag}
+              url={slide.url}
+              title={slide.title}
+            />
+          </HeroSlide>
+        ))}
+        {/* <GradientOverlay /> */}
 
         <NavContainer>
-          <NavLink to="/">
-            <NavItem active={this.state.currentIndex === 0}>
-              <p>Gorgeous white sand beaches in Anguilla</p>
+          {HeroSlidesData.map((slide, index) => (
+            <NavItem
+              active={this.state.currentSlideIndex === index}
+              onClick={() => {
+                this.changeIndex(index)
+                this.resetAutoplay()
+              }}>
+              <p>{slide.title}</p>
             </NavItem>
-          </NavLink>
-          <NavLink to="/">
-            <NavItem active={this.state.currentIndex === 1}>
-              <p>Turquoise waters in Tulum</p>
-            </NavItem>
-          </NavLink>
-          <NavLink to="/">
-            <NavItem active={this.state.currentIndex === 2}>
-              <p>Night market in Shanghai</p>
-            </NavItem>
-          </NavLink>
+          ))}
         </NavContainer>
       </HeroContainer>
     )

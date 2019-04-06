@@ -6,22 +6,36 @@ import { fadeIn, raiseIn } from '../../theme/animations'
 
 const FeaturedPostContainer = styled.div`
   position: absolute;
+  top: 9rem;
   color: #fff;
   margin-left: 4rem;
-  width: 50vw;
+  width: 40vw;
   height: 60vh;
   align-self: center;
   display: flex;
   flex-direction: column;
   justify-content: center;
+  z-index: 102;
+
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.8s ease, visibility 0.8s ease;
+
+  ${({ active }) =>
+    active &&
+    `
+    opacity: 1;
+    visibility: visible;
+  `};
 `
 
 const PostTitle = styled.h1`
   font-family: 'Poiret One', sans-serif;
+  text-shadow: 1px 1px rgba(0, 0, 0, 0.2);
   color: #fff;
   align-self: center;
   font-size: 3.5rem;
-  font-weight: 500;
+  font-weight: 700;
   line-height: 5rem;
   margin: 0;
 
@@ -44,6 +58,7 @@ const PostTag = styled(PostLink)`
   font-size: 0.7rem;
   font-weight: 400;
   text-transform: uppercase;
+  letter-spacing: 3px;
   margin: 0;
 
   opacity: 0;
@@ -88,8 +103,8 @@ const PostButton = styled(PostTag)`
   }
 `
 
-const FeaturedPost = ({ tag, url, title }) => (
-  <FeaturedPostContainer>
+const FeaturedPost = ({ active, tag, url, title }) => (
+  <FeaturedPostContainer active={active}>
     <PostTag to={`/tags/${tag}`}>{tag}</PostTag>
     <PostLink to={`/blog/${url}`}>
       <PostTitle>{title}</PostTitle>
