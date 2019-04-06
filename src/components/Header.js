@@ -18,23 +18,22 @@ const TitleContainer = styled.div`
 `
 
 const Title = styled.h1`
-  font-family: 'Amatic SC', sans-serif;
-  font-size: 3rem;
+  font-family: 'Satisfy', cursive;
+  font-size: 2.5rem;
+  padding: 0.8rem;
+  padding-bottom: 0.7rem;
   color: #fff;
   margin: 0;
-  margin-left: 2rem;
-  width: 20rem;
 `
 
 const SecondaryTitle = styled.h1`
-  font-family: 'La Belle Aurore', sans-serif;
-  font-size: 2.5rem;
-  line-height: 5rem;
-  color: rgba(137, 236, 218, 0.8);
-  position: relative;
-  width: 100%;
-  top: -2.1rem;
-  left: 5rem;
+  font-family: 'Hind Vadodara', sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 4px;
+  color: white;
+  font-size: 0.8rem;
+  margin-left: 4rem;
+  margin-top: 0.5rem;
 `
 
 const Header = ({ siteTitle }) => (
@@ -46,7 +45,15 @@ const Header = ({ siteTitle }) => (
         }}
         to="/">
         <Title>{siteTitle}</Title>
-        <SecondaryTitle>By Cece</SecondaryTitle>
+        <div
+          style={{
+            height: '2px',
+            width: '100%',
+            background:
+              'linear-gradient(0.25turn, rgba(255, 223, 0, 0.7) 27%, white 50%, rgba(255, 223, 0, 0.7) 73%)',
+          }}
+        />
+        <SecondaryTitle>Travels With Cece</SecondaryTitle>
       </Link>
     </TitleContainer>
   </HeaderContainer>
