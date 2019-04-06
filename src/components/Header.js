@@ -18,7 +18,7 @@ const TitleContainer = styled.div`
 `
 
 const Title = styled.h1`
-  font-family: 'Satisfy', cursive;
+  font-family: 'Playball', cursive;
   font-size: 2.5rem;
   padding: 0.8rem;
   padding-bottom: 0.7rem;

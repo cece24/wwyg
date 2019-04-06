@@ -61,7 +61,7 @@ function SEO({ description, lang, meta, keywords, title }) {
               )
               .concat(meta)}>
             <link
-              href="https://fonts.googleapis.com/css?family=Hind+Vadodara:300,400,500,600,700|Ubuntu:300,300i,400,400i,500,500i,700,700i|Poiret+One|Satisfy"
+              href="https://fonts.googleapis.com/css?family=Hind+Vadodara:300,400,500,600,700|Ubuntu:300,300i,400,400i,500,500i,700,700i|Poiret+One|Satisfy|Playball|Josefin+Sans:400,600,700|Hind+Guntur:400,500,600,700"
               rel="stylesheet"
             />
           </Helmet>

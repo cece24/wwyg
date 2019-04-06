@@ -30,12 +30,11 @@ const FeaturedPostContainer = styled.div`
 `
 
 const PostTitle = styled.h1`
-  font-family: 'Poiret One', sans-serif;
-  text-shadow: 1px 1px rgba(0, 0, 0, 0.2);
+  font-family: 'Hind Guntur', sans-serif;
   color: #fff;
   align-self: center;
   font-size: 3.5rem;
-  font-weight: 700;
+  font-weight: 600;
   line-height: 5rem;
   margin: 0;
 
@@ -96,9 +95,11 @@ const PostButton = styled(PostTag)`
 
   &:hover {
     top: -0.3rem;
-    background-color: #fff;
+    background-color: rgba(255, 255, 255, 0.4);
+    border: none;
     p {
-      color: rgba(137, 236, 218, 0.8);
+      color: #faf9f6;
+      // color: rgba(137, 236, 218, 0.8);
     }
   }
 `
